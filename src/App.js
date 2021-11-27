@@ -2,10 +2,10 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import LoginScreen from './screens/LoginScreen';
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   Routes,
   Route,
-  HashRouter,
+  HashRouter as Router,
 } from 'react-router-dom';
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
@@ -20,22 +20,20 @@ const App = () => {
   console.log(isLogin);
   return (
     <userContext.Provider value={{ isLogin, setIsLogin }}>
-      <HashRouter>
-        <Router>
-          <Header />
-          <Container>
-            <Routes>
-              <Route path='/' element={<LoginScreen />} exact />
-              <Route path='/register' element={<Register />} />
-              <Route
-                exact
-                path='/home'
-                element={<ProtectedRoute isLogin={isLogin} />}
-              />
-            </Routes>
-          </Container>
-        </Router>
-      </HashRouter>
+      <Router>
+        <Header />
+        <Container>
+          <Routes>
+            <Route path='/' element={<LoginScreen />} exact />
+            <Route path='/register' element={<Register />} />
+            <Route
+              exact
+              path='/home'
+              element={<ProtectedRoute isLogin={isLogin} />}
+            />
+          </Routes>
+        </Container>
+      </Router>
     </userContext.Provider>
   );
 };
