@@ -1,7 +1,12 @@
 import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import LoginScreen from './screens/LoginScreen';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  HashRouter,
+} from 'react-router-dom';
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
 import Register from './screens/Register';
@@ -15,20 +20,22 @@ const App = () => {
   console.log(isLogin);
   return (
     <userContext.Provider value={{ isLogin, setIsLogin }}>
-      <Router>
-        <Header />
-        <Container>
-          <Routes>
-            <Route path='/' element={<LoginScreen />} exact />
-            <Route path='/register' element={<Register />} />
-            <Route
-              exact
-              path='/home'
-              element={<ProtectedRoute isLogin={isLogin} />}
-            />
-          </Routes>
-        </Container>
-      </Router>
+      <HashRouter>
+        <Router>
+          <Header />
+          <Container>
+            <Routes>
+              <Route path='/' element={<LoginScreen />} exact />
+              <Route path='/register' element={<Register />} />
+              <Route
+                exact
+                path='/home'
+                element={<ProtectedRoute isLogin={isLogin} />}
+              />
+            </Routes>
+          </Container>
+        </Router>
+      </HashRouter>
     </userContext.Provider>
   );
 };
